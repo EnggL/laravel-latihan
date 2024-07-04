@@ -32,7 +32,8 @@
                     <h5>Nomor Induk SIswa (NIS)</h5>
                 </div>
                 <div class="col-md">
-                    <input type="text" class="form-control numeric-only" placeholder="Masukan Nomor Induk SIswa (NIS)" name="nis" value="{{$student->nis}}"/>
+                    <input type="text" class="form-control numeric-only" placeholder="Masukan Nomor Induk SIswa (NIS)"
+                        name="nis" value="{{$student->nis}}" />
                 </div>
 
                 <div class="col-md" style="margin-top: 20px;">
@@ -41,7 +42,9 @@
                 <div class="col-md">
                     <select class="form-control select2-default" placeholder="Masukan Kelas" name="class">
                         @foreach ($class_list as $class)
-                            <option value="{{$class->id}}" {{$class->id == $student->class_id ? 'selected' : ''}}>{{$class->name}}</option>
+                            <option value="{{$class->id}}" {{$class->id == $student->class_id ? 'selected' : ''}}>
+                                {{$class->name}}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -54,7 +57,8 @@
                         data-placeholder="Masukan Ekskul">
                         @foreach ($ekskul_list as $ekskul)
                             <option value="{{$ekskul->id}}">{{$ekskul->name}}</option>
-                        @endforeach                    </select>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="col-md" style="margin-top: 50px; text-align: center;">
