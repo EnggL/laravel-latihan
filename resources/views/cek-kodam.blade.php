@@ -1,0 +1,1 @@
+<h1>ID Kodam anda Adalah {{$id}}</h1>
