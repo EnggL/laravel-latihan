@@ -23,64 +23,10 @@ $(function () {
         });
     });
 
-    function ajaxDeleteSiswa(id, nama) {
-        $.ajax({
-            url: base_url + '/students/delete/' + id,
-            type: 'DELETE',
-            data: {
-                'id': id,
-                "_token": csrf,
-            },
-            dataType: 'json',
-            success: function (data) {
-                berhasilHapusSiswa(nama);
-                // alert(data);
-            },
-            error: function (request, error) {
-                alert("Request: " + JSON.stringify(request));
-            }
-        });
-    }
-
-    //Menampilkan loading untuk memblokir interface
-    //jangan lupa close swall atau reload halaman
-    function swalLoading(text = "Sedang Memuat...") {
-        Swal.fire({
-            title: text,
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            showConfirmButton: false,
-        });
-    }
-
-    function berhasilHapusSiswa(nama) {
-        Swal.fire({
-            title: "Deleted!",
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            showConfirmButton: true,
-            text: "Siswa " + nama + " berhasil di hapus!",
-            icon: "success"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                swalLoading();
-                location.reload();
-            }
-        });
-    }
 
     $(".edit-student").click(function name() {
         const id = $(this).val();
         window.location.href = base_url + "/students/edit/" + id;
-    });
-
-    $('.select2-default').select2({
-        theme: 'bootstrap4',
-        placeholder: $(this).attr('placeholder'),
-    });
-
-    $('.select2-multiple').select2({
-        allowClear: true
     });
 
     $("#btnCancleEditStudent").click(function name() {
@@ -102,25 +48,103 @@ $(function () {
     });
 
     $("#btnAddEditStudent").click(function name() {
-        $.ajax({
-            url: base_url + '/students/delete/' + id,
-            type: 'DELETE',
-            data: {
-                'id': id,
-                "_token": csrf,
-            },
-            dataType: 'json',
-            success: function (data) {
-                berhasilHapusSiswa(nama);
-                // alert(data);
-            },
-            error: function (request, error) {
-                alert("Request: " + JSON.stringify(request));
-            }
-        });
+        const data = {
+            id: $(this).val(),
+            name: $("#name").val(),
+            gender: $("#gender").val(),
+            nis: $("#nis").val(),
+            class: $("#class").val(),
+            ekskul: $("#ekskul").val()
+        };
+        ajaxCheckData(data);
     });
 
     $(document).on('input', 'input.uppercase', function () {
         this.value = this.value.toUpperCase()
     });
 });
+
+function ajaxCheckData(data) {
+    swalLoading();
+    $.ajax({
+        url: base_url + '/students/edit_check/' + data.id,
+        type: 'POST',
+        data: {
+            "_token": csrf,
+            id: data.id,
+            name: data.name,
+            gender: data.gender,
+            nis: data.nis,
+            class: data.class,
+            ekskul: data.ekskul
+        },
+        dataType: 'json',
+        success: function (result) {
+            // location.replace(base_url + '/students');
+            confirmEditSiswa(result, data);
+        },
+        error: function (request, error) {
+            var pesan = '';
+            $.each(request.responseJSON.errors, function (i, error) {
+                pesan += "<p>" + error[0] + "</p>";
+            });
+            showErrorAlert(pesan); //from global.js
+        }
+    });
+}
+
+function confirmEditSiswa(result, data) {
+    Swal.fire({
+        html: result.html,
+        icon: "warning",
+        showConfirmButton: true,
+        confirmButtonColor: 'green',
+        cancelButtonColor: 'red',
+        showCancelButton: true,
+        confirmButtonText: "Ya, simpan",
+        cancelButtonText: "Batal"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            ajaxSaveEdit(data)
+        }
+    });
+}
+
+function ajaxSaveEdit(data) {
+    
+}
+
+function berhasilHapusSiswa(nama) {
+    Swal.fire({
+        title: "Deleted!",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: true,
+        text: "Siswa " + nama + " berhasil di hapus!",
+        icon: "success"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            swalLoading();
+            location.reload();
+        }
+    });
+}
+
+function ajaxDeleteSiswa(id, nama) {
+    $.ajax({
+        url: base_url + '/students/delete/' + id,
+        type: 'DELETE',
+        data: {
+            'id': id,
+            "_token": csrf,
+        },
+        dataType: 'json',
+        success: function (data) {
+            berhasilHapusSiswa(nama);
+            // alert(data);
+        },
+        error: function (request, error) {
+            alert("Request: " + JSON.stringify(request));
+        }
+    });
+}
