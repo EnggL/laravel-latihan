@@ -29,11 +29,11 @@ Route::get('/cek/{id}', function ($id) {
     return view('cek-kodam', ['id' => $id]);
 });
 
-Route::get('/students', [StudentController::class, 'index']);
 Route::prefix('students')->group(function () {
+    Route::get('/', [StudentController::class, 'index']);
     Route::delete('/delete/{id}', [StudentController::class, 'delete']);
     Route::get('/edit/{id}', [StudentController::class, 'edit']);
-    Route::get('/edit_check', [StudentController::class, 'edit']);
+    Route::post('/edit_check/{id}', [StudentController::class, 'edit_check']);
 });
 
 Route::get('/class', [ClassController::class, 'index']);
