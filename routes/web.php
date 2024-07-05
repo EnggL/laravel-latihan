@@ -34,8 +34,12 @@ Route::prefix('students')->group(function () {
     Route::delete('/delete/{id}', [StudentController::class, 'delete']);
     Route::get('/edit/{id}', [StudentController::class, 'edit']);
     Route::post('/edit_check/{id}', [StudentController::class, 'edit_check']);
+    Route::post('/update/{id}', [StudentController::class, 'update']);
 });
 
 Route::get('/class', [ClassController::class, 'index']);
-Route::get('/ekskul', [EkskulController::class, 'index']);
+Route::prefix('ekskul')->group(function () {
+    Route::get('/', [EkskulController::class, 'index']);
+    Route::get('/cek', [EkskulController::class, 'check_ekskul']);
+});
 Route::get('/teachers', [TeacherController::class, 'index']);
