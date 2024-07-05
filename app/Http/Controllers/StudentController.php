@@ -71,7 +71,6 @@ class StudentController extends Controller
         $student->nis = $request->nis;
         $student->gender = $request->gender;
         $student->class_id = $request->class;
-        // $saved              = $student->save();
 
         $class = ClassRoom::with('wali')->where('id', '=', $request->class)->get();
         $ekskul = Ekskul::whereIn('id', $request->ekskul)->get();
@@ -95,6 +94,34 @@ class StudentController extends Controller
         // }else{
 
         // }
+    }
+
+    function update(StudentEditRequest $request, $id)
+    {
+        $student = Student::findOrFail($id);
+
+        $student->name = $request->name;
+        $student->nis = $request->nis;
+        $student->gender = $request->gender;
+        $student->class_id = $request->class;
+        $student->update();
+
+        $this->update_ekskul($request->ekskul, $id);
+
+        $request->session()->flash('status', 'success');
+        $request->session()->flash('message', 'Berhasil mengupdate data siswa!');
+
+        return redirect('/students');
+    }
+
+    /*
+    $data array;
+    $id integer
+    @return null
+    */
+    function update_ekskul($data, $id)
+    {
+
     }
 
     function get_gender_name($id = null)

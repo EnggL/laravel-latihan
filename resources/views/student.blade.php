@@ -5,6 +5,11 @@
     <div class="row">
         <div class="col-md">
             <h2 style="text-align: center; margin-top: 20px;">Daftar Siswa</h2>
+            @if (Session::has('status'))
+                <div class="alert alert-success" role="alert">
+                    {{Session::get('message')}}
+                </div>
+            @endif
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -64,4 +69,5 @@
 
 @include('home-footer')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('js/student.js') }}"></script>

@@ -22,4 +22,11 @@ class ClassController extends Controller
             "kelas"=> $kelas
         ]);
     }
+
+    function check_ekskul(Request $request)
+    {
+        $list_ekskul = $request->collect();
+
+        return $list_ekskul;
+    }
 }

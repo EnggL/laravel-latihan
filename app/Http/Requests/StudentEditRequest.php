@@ -27,7 +27,6 @@ class StudentEditRequest extends FormRequest
         $id = $this->route('id');
 
         return [
-            "id"=> "required",
             "name"=> "regex:/^[\pL\s\-]+$/u|string|min:3|max:1000|required",
             "nis"=> [
                 "required",
@@ -49,7 +48,7 @@ class StudentEditRequest extends FormRequest
             "name.regex"=> "Nama hanya boleh berisi alphabet dan spasi!",
             "name.max"=> "Nama tidak boleh melebihi :max karakter!",
             "nis.required"=> "Nis harus di isi!",
-            "nis.unique"=> "Nis sudah digunakan!".$id,
+            "nis.unique"=> "Nis sudah digunakan!",
             "nis.max_digits"=> "Nis tidak boleh melebihi :max angka!",
             "nis.numeric"=> "Nis hanya boleh berisi angka!",
             "gender.required"=> "Gender harus di isi!",
