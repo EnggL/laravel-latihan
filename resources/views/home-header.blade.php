@@ -11,19 +11,35 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <?php
-        if(isset($css) && is_array($css))
-        {
-            foreach($css as $key)
-            {
-                echo '<link rel="stylesheet" href="'.URL::asset('css/'.$key).'">';
-            }
-        }
-        else
-        {
+    <!-- Load CSS -->
+    @if (isset($css) && is_array($css))
+        @foreach ($css as $key)
+            <link rel="stylesheet" href="{{URL::asset('css/'.$key)}}">
+        @endforeach
+    @endif
 
-        }
-    ?>
+    <!-- Load Plugin CSS -->
+    @if (isset($plugin))
+        <!-- SweetAlert2 https://sweetalert2.github.io/ -->
+        @if (in_array('sweet-alert', $plugin))
+            <!-- Nope dia nggak perlu CSS -->
+        @endif
+
+        <!-- Select2 https://select2.org/ -->
+        @if (in_array('select2', $plugin))
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+        @endif
+        
+        <!-- Select2 https://select2.org/ -->
+        @if (in_array('datatables', $plugin))
+            <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css"> -->
+
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+            <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap4.css">
+        @endif
+    @endif
 </head>
 
 <script>

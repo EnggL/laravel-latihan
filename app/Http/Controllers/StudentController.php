@@ -42,8 +42,10 @@ class StudentController extends Controller
                 "keyword" => $keyword,
                 "active" => 'students',
                 "studentList" => $student,
-                "column"=> $column,
-                "order"=> $order,
+                "column" => $column,
+                "order" => $order,
+                'js' => ['student/student.js'],
+                'plugin' => ['sweet-alert']
             ]
         );
     }
@@ -71,7 +73,9 @@ class StudentController extends Controller
                 "student" => $student,
                 "class_list" => $class,
                 "ekskul_list" => $ekskul,
-                "student_ekskul" => $student_ekskul
+                "student_ekskul" => $student_ekskul,
+                'js' => ['student/student-edit.js','global.js'],
+                'plugin' => ['sweet-alert', 'select2']
             ]
         );
     }

@@ -36,7 +36,7 @@ $(document).ready(function () {
 });
 
 function ajaxCheckData(data) {
-    swalLoading(); //fromn global.js
+    SweetAlert.loading(); //fromn sweet-alert.js
     $.ajax({
         url: base_url + '/students/edit_check/' + data.id,
         type: 'POST',
@@ -59,7 +59,7 @@ function ajaxCheckData(data) {
             $.each(request.responseJSON.errors, function (i, error) {
                 pesan += "<p>" + error[0] + "</p>";
             });
-            showErrorAlert(pesan); //from global.js
+            SweetAlert.alert(pesan); //from sweet-alert.js
         }
     });
 }
@@ -76,7 +76,7 @@ function confirmEditSiswa(result, data) {
         cancelButtonText: "Batal"
     }).then((result) => {
         if (result.isConfirmed) {
-            swalLoading();
+            SweetAlert.loading(); // sweet-alert.js
             $("#formEditStudent").submit();
         }
     });

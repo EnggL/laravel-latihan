@@ -40,7 +40,11 @@ Route::prefix('students')->group(function () {
     Route::post('/update/{id}', [StudentController::class, 'update']);
 });
 
-Route::get('/class', [ClassController::class, 'index']);
+Route::prefix('class')->group(function () {
+    Route::get('/', [ClassController::class, 'index']);
+    Route::get('/show_students/{id}', [ClassController::class, 'show_students']);
+});
+
 Route::prefix('ekskul')->group(function () {
     Route::get('/', [EkskulController::class, 'index']);
     Route::get('/cek', [EkskulController::class, 'check_ekskul']);
