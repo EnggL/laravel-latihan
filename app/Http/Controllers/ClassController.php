@@ -10,15 +10,16 @@ class ClassController extends Controller
 {
     public function index()
     {
-        $kelas = ClassRoom::with('siswa', 'wali')->get();
+        $kelas = ClassRoom::with([
+            'siswa' => function($query){
+                $query->limit(5);
+            },
+            'wali'
+            ])->get();
 
         return view("class",
         [
             "active"=> 'class',
-            'css'=> 
-            [
-                'kelas.css'
-            ],
             "kelas"=> $kelas
         ]);
     }

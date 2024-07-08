@@ -65,6 +65,6 @@ function ajaxDeleteSiswa(id, nama) {
     });
 }
 
-// ---------------- Untuk Halaman Edit----------------------//
-
-// ---------------- End Untuk Halaman Edit----------------------//
+$(document).on('submit', '#formOptionSiswa', function () {
+    swalLoading(); //dari global.js
+});

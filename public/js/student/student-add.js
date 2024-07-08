@@ -1,7 +1,8 @@
 $(document).ready(function () {
-    $("#btnCancleEditStudent").click(function name() {
+    $('#btnCancleAddStudent').click(function (e) { 
+        e.preventDefault();
         Swal.fire({
-            title: "Batal Mengedit data Siswa?",
+            title: "Batal menambahkan data siswa?",
             text: "Anda yakin ingin keluar dari halaman ini?",
             icon: "warning",
             showConfirmButton: true,
@@ -17,7 +18,8 @@ $(document).ready(function () {
         });
     });
 
-    $("#btnCheckEditStudent").click(function name() {
+    $('#btnAddEditStudent').click(function (e) { 
+        e.preventDefault();
         const data = {
             id: $(this).val(),
             name: $("#name").val(),
@@ -29,16 +31,12 @@ $(document).ready(function () {
         // ajaxCheck
         ajaxCheckData(data);
     });
-
-    $("input#name, select#gender, input#nis, select#class, select#ekskul").change(function () {
-        $("#btnCheckEditStudent").attr('disabled', false);
-    });
 });
 
 function ajaxCheckData(data) {
     swalLoading(); //fromn global.js
     $.ajax({
-        url: base_url + '/students/edit_check/' + data.id,
+        url: base_url + '/students/add_check/',
         type: 'POST',
         data: {
             "_token": csrf,
@@ -52,7 +50,7 @@ function ajaxCheckData(data) {
         dataType: 'json',
         success: function (result) {
             // location.replace(base_url + '/students');
-            confirmEditSiswa(result, data);
+            confirmAddSiswa(result, data);
         },
         error: function (request, error) {
             var pesan = '';
@@ -64,7 +62,7 @@ function ajaxCheckData(data) {
     });
 }
 
-function confirmEditSiswa(result, data) {
+function confirmAddSiswa(result, data) {
     Swal.fire({
         html: result.html,
         icon: "warning",
@@ -76,8 +74,8 @@ function confirmEditSiswa(result, data) {
         cancelButtonText: "Batal"
     }).then((result) => {
         if (result.isConfirmed) {
-            swalLoading();
-            $("#formEditStudent").submit();
+            swalLoading(); //fromn global.js
+            $("#formAddStudent").submit();
         }
     });
 }
