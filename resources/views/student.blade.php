@@ -106,7 +106,3 @@
 </div>
 
 @include('home-footer')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script type="text/javascript" src="{{ URL::asset('js/global.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('js/student/student.js') }}"></script>

@@ -1,8 +1,5 @@
 @include('home-header')
 @section('title', 'Student')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
 
 <div class="container">
     <div class="row">
@@ -88,6 +85,3 @@
 </div>
 
 @include('home-footer')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script type="text/javascript" src="{{ URL::asset('js/student/student-edit.js') }}"></script>
