@@ -5,6 +5,41 @@
     <div class="row">
         <div class="col-md">
             <h2 style="text-align: center; margin-top: 20px;">Daftar Siswa</h2>
+
+            <form action="" method="get" id="formOptionSiswa">
+                <div class="row">
+                    <div class="col-md-5 input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Nama / Nis / Kelas / Wali / Ekskul" aria-label="Masukan Pencarian" aria-describedby="button-addon2" name="keyword" value="{{$keyword}}">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" style="width: 100px;" type="submit" id="button-addon2">Cari</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 input-group mb-3">
+                        <select name="column" id="" class="form-control custom-select">
+                            <option value="nama" {{$column == 'name' ? 'selected':''}}>Nama</option>
+                            <option value="gender" {{$column == 'gender' ? 'selected':''}}>Gender</option>
+                            <option value="nis" {{$column == 'nis' ? 'selected':''}}>Nis</option>
+                            <option value="kelas" {{$column == 'class' ? 'selected':''}}>Kelas</option>
+                            <option value="ekskul" {{$column == 'ekskul' ? 'selected':''}}>Ekskul</option>
+                        </select>
+                        <select name="order" id="" class="form-control custom-select">
+                            <option value="asc" {{$order == 'asc' ? 'selected':''}}>Kecil - besar</option>
+                            <option value="desc" {{$order == 'desc' ? 'selected':''}}>Besar - kecil</option>
+                        </select>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" style="width: 100px;" type="submit" id="button-addon2">Urutkan</button>
+                        </div>
+                    </div>
+                    <div class="col-md-7 mb-3" style="text-align: right">
+                        <a class="btn btn-success" href="{{url('students/add')}}">
+                            <i class="bi bi-plus"></i> Tambah Siswa
+                        </a>
+                    </div>
+                </div>
+            </form>
+
             @if (Session::has('status'))
                 <div class="alert alert-success" role="alert">
                     {{Session::get('message')}}
@@ -25,7 +60,8 @@
                 <tbody>
                     @foreach ($studentList as $row)
                         <tr>
-                            <td>{{$loop->iteration}}</td>
+                            <!-- https://stackoverflow.com/a/70305564 -->
+                            <td>{{$studentList->firstItem() + $loop->index}}</td>
                             <td>{{$row->name}}</td>
                             <td>
                                 <?php
@@ -63,6 +99,8 @@
                     @endforeach
                 </tbody>
             </table>
+
+            {{$studentList->withQueryString()->links()}}
         </div>
     </div>
 </div>
@@ -70,4 +108,5 @@
 @include('home-footer')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script type="text/javascript" src="{{ URL::asset('js/student.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/global.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/student/student.js') }}"></script>

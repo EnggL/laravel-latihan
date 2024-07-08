@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Ekskul;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -25,9 +26,10 @@ class StudentEditRequest extends FormRequest
     public function rules()
     {
         $id = $this->route('id');
+        $ekskul = Ekskul::all();
 
         return [
-            "name"=> "regex:/^[\pL\s\-]+$/u|string|min:3|max:1000|required",
+            "name"=> "required|regex:/^[\pL\s\-]+$/u|string|min:3|max:1000",
             "nis"=> [
                 "required",
                 "max_digits:5",
@@ -35,7 +37,7 @@ class StudentEditRequest extends FormRequest
                 Rule::unique('students', 'nis')->ignore($id)
             ],
             "gender"=> ["required", Rule::in(['0', '1'])],
-            "class"=> "required",
+            "class"=> "required|exists:App\Models\ClassRoom,id",
         ];
     }
 
@@ -45,6 +47,7 @@ class StudentEditRequest extends FormRequest
 
         return [
             "name.required"=> "Nama harus di isi!",
+            "name.min"=> "Nama minimal :min karakter!",
             "name.regex"=> "Nama hanya boleh berisi alphabet dan spasi!",
             "name.max"=> "Nama tidak boleh melebihi :max karakter!",
             "nis.required"=> "Nis harus di isi!",
@@ -54,6 +57,7 @@ class StudentEditRequest extends FormRequest
             "gender.required"=> "Gender harus di isi!",
             "gender.in"=> "Gender Tidak di temukan!",
             "class.required"=> "Kelas harus di isi!",
+            "class.exists"=> "Kelas tidak di temukan!",
         ];
     }
 }

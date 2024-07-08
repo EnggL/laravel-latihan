@@ -31,6 +31,9 @@ Route::get('/cek/{id}', function ($id) {
 
 Route::prefix('students')->group(function () {
     Route::get('/', [StudentController::class, 'index']);
+    Route::get('/add', [StudentController::class, 'add']);
+    Route::post('/add_check', [StudentController::class, 'add_check']);
+    Route::post('/save', [StudentController::class, 'save']);
     Route::delete('/delete/{id}', [StudentController::class, 'delete']);
     Route::get('/edit/{id}', [StudentController::class, 'edit']);
     Route::post('/edit_check/{id}', [StudentController::class, 'edit_check']);
