@@ -9,7 +9,16 @@ class CustomSweetAlert {
         this.loadingType = '';
     }
 
-    alert() {
+    alert(title = null, html = null, icon = null) {
+        if(title)
+            this.title = title;
+
+        if(html)
+            this.html = html;
+
+        if(icon)
+            this.type = icon;
+
         Swal.fire({
             title: this.title,
             html: this.html,

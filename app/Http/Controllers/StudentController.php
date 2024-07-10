@@ -146,7 +146,7 @@ class StudentController extends Controller
 
 
         $request->session()->flash('status', 'success');
-        $request->session()->flash('message', 'Berhasil mengupdate data siswa!');
+        $request->session()->flash('message', 'Berhasil mengupdate data siswa '.$request->name.'!');
 
         return redirect('/students');
     }

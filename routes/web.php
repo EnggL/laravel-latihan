@@ -43,10 +43,20 @@ Route::prefix('students')->group(function () {
 Route::prefix('class')->group(function () {
     Route::get('/', [ClassController::class, 'index']);
     Route::get('/show_students/{id}', [ClassController::class, 'show_students']);
+    Route::get('/delete/{id}', [ClassController::class, 'delete']);
+    Route::get('/add', [ClassController::class, 'add']);
+    Route::post('/save', [ClassController::class, 'save']);
+    Route::get('/edit/{id}', [ClassController::class, 'edit']);
+    Route::post('/update/{id}', [ClassController::class, 'update']);
 });
 
 Route::prefix('ekskul')->group(function () {
     Route::get('/', [EkskulController::class, 'index']);
     Route::get('/cek', [EkskulController::class, 'check_ekskul']);
+    Route::get('/add', [EkskulController::class, 'add']);
+    Route::get('/edit/{id}', [EkskulController::class, 'edit']);
+    Route::post('/save', [EkskulController::class, 'save']);
+    Route::post('/delete', [EkskulController::class, 'delete']);
+    Route::post('/update/{id}', [EkskulController::class, 'update']);
 });
 Route::get('/teachers', [TeacherController::class, 'index']);
