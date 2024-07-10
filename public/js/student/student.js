@@ -17,7 +17,7 @@ $(function () {
             cancelButtonText: "No, cancel!"
         }).then((result) => {
             if (result.isConfirmed) {
-                swalLoading("Menghapus Data...");
+                SweetAlert.loading("Menghapus Data...");
                 ajaxDeleteSiswa(id, siswa);
             }
         });
@@ -40,7 +40,7 @@ function berhasilHapusSiswa(nama) {
         icon: "success"
     }).then((result) => {
         if (result.isConfirmed) {
-            swalLoading();
+            SweetAlert.loading();
             location.reload();
         }
     });
