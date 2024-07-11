@@ -10,13 +10,13 @@ class CustomSweetAlert {
     }
 
     alert(title = null, html = null, icon = null) {
-        if(title)
+        if (title)
             this.title = title;
 
-        if(html)
+        if (html)
             this.html = html;
 
-        if(icon)
+        if (icon)
             this.type = icon;
 
         Swal.fire({
@@ -65,3 +65,14 @@ class CustomSweetAlert {
 }
 
 const SweetAlert = new CustomSweetAlert();
+
+const Toast = Swal.mixin({
+    toast: true,
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+    }
+});

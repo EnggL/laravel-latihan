@@ -65,7 +65,7 @@
                     isset($active) ? "": $active = false;
                 ?>
                 <li class="nav-item {{$active == 'home' ? 'active':''}}">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item {{$active == 'students' ? 'active':''}}">
                     <a class="nav-link" href="/students">Students</a>

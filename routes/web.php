@@ -59,4 +59,9 @@ Route::prefix('ekskul')->group(function () {
     Route::post('/delete', [EkskulController::class, 'delete']);
     Route::post('/update/{id}', [EkskulController::class, 'update']);
 });
-Route::get('/teachers', [TeacherController::class, 'index']);
+Route::prefix('teachers')->group(function () {
+    Route::get('/', [TeacherController::class, 'index']);
+    Route::post('/save', [TeacherController::class, 'save']);
+    Route::post('/delete', [TeacherController::class, 'delete']);
+    Route::post('/update/{id}', [TeacherController::class, 'update']);
+});
